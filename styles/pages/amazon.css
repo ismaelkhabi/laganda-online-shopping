@@ -1,0 +1,193 @@
+.main {
+  margin-top: 60px;
+}
+
+.products-grid {
+  display: grid;
+
+  /* - In CSS Grid, 1fr means a column will take up the
+       remaining space in the grid.
+     - If we write 1fr 1fr ... 1fr; 8 times, this will
+       divide the grid into 8 columns, each taking up an
+       equal amount of the space.
+     - repeat(8, 1fr); is a shortcut for repeating "1fr"
+       8 times (instead of typing out "1fr" 8 times).
+       repeat(...) is a special property that works with
+       display: grid; */
+  grid-template-columns: repeat(8, 1fr);
+}
+
+/* @media is used to create responsive design (making the
+   website look good on any screen size). This @media
+   means when the screen width is 2000px or less, we
+   will divide the grid into 7 columns instead of 8. */
+@media (max-width: 2000px) {
+  .products-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+/* This @media means when the screen width is 1600px or
+   less, we will divide the grid into 6 columns. */
+@media (max-width: 1600px) {
+  .products-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 1300px) {
+  .products-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 575px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 450px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-container {
+  border: 1px solid rgb(2, 72, 102);
+  background-color: rgb(2, 83, 118);
+
+  padding-right: 20px;
+
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.product-container:hover {
+  transform: scale(1.05);
+  border: none;
+  box-shadow: 0 0 1000px rgba(0, 0, 0, 0.199);
+  z-index: 50;
+}
+
+.product-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  margin: 20px 10px 20px 10px;
+
+  border-radius: 15px;
+
+  background-color: white;
+  border: 1px solid black;
+  z-index: -10;
+}
+
+.product-image {
+  /* Images will overflow their container by default. To
+    prevent this, we set max-width and max-height to 100%
+    so they stay inside their container. */
+  max-width: 80%;
+  max-height: 80%;
+
+  z-index: -5;
+
+  transition: all 0.4s ease-out;
+}
+
+.product-image:hover {
+  transform: scale(1.15);
+}
+
+.product-name {
+  margin-left: 20px;
+  height: 80px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.product-rating-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+.product-rating-stars {
+  width: 100px;
+  margin-right: 6px;
+}
+
+.product-rating-count {
+  color: rgb(255, 255, 0);
+  cursor: pointer;
+  margin-top: 3px;
+}
+
+.product-price {
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  color: white;
+}
+
+.product-quantity-container {
+  margin-bottom: 17px;
+  margin-left: 20px;
+}
+
+.product-spacer {
+  flex: 1;
+}
+
+.added-to-cart {
+  color: rgb(6, 125, 98);
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+
+  /* At first, the "Added to cart" message will
+     be invisible. Use JavaScript to change the
+     opacity and make it visible. */
+  opacity: 0;
+}
+
+.added-to-cart img {
+  height: 20px;
+  margin-right: 5px;
+}
+
+.add-to-cart-button {
+  width: 85%;
+  padding: 8px;
+  border-radius: 50px;
+  transition: all 0.1s ease;
+  margin: 0 10px 17px 25px;
+}
+
+.add-to-cart-button:hover {
+  transform: scale(1.05);
+}
+
+.add-to-cart-button:active {
+  transform: scale(0.95);
+}
