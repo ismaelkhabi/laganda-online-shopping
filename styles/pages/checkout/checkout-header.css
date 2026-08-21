@@ -2,16 +2,23 @@
   height: 60px;
   padding-left: 30px;
   padding-right: 30px;
-  background-color: white;
+  background-color: rgb(6, 22, 81);
 
   display: flex;
   justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.744);
 
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+
+  transition: all 0.3s ease;
+}
+
+.checkout-header:hover {
+  box-shadow: 0 0 20px black;
 }
 
 .header-content {
@@ -28,7 +35,8 @@
 
 .amazon-logo {
   width: 100px;
-  margin-top: 12px;
+  margin-top: 5px;
+  margin-left: -8px;
 }
 
 .amazon-mobile-logo {
@@ -65,10 +73,12 @@
 
   display: flex;
   justify-content: center;
+
+  color: white;
 }
 
 .return-to-home-link {
-  color: rgb(0, 113, 133);
+  color: rgb(226, 130, 7);
   font-size: 23px;
   text-decoration: none;
   cursor: pointer;
