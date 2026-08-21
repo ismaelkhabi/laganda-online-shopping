@@ -18,6 +18,7 @@
   font-weight: 700;
   font-size: 22px;
   margin-bottom: 18px;
+  color: rgb(255, 255, 255);
 }
 
 .checkout-grid {
@@ -44,17 +45,26 @@
 
 .cart-item-container,
 .payment-summary {
-  border: 1px solid rgb(222, 222, 222);
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(245, 245, 245);
   border-radius: 4px;
   padding: 18px;
+  transition: all 0.1s ease-in-out;
 }
 
 .cart-item-container {
   margin-bottom: 12px;
 }
 
+.payment-summary:hover,
+.cart-item-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 1000px rgba(0, 0, 0, 0.242);
+}
+
 .payment-summary {
   padding-bottom: 5px;
+  color: rgb(255, 255, 255);
 }
 
 @media (max-width: 1000px) {
@@ -69,7 +79,7 @@
 }
 
 .delivery-date {
-  color: rgb(0, 118, 0);
+  color: rgb(70, 255, 113);
   font-weight: 700;
   font-size: 19px;
   margin-top: 5px;
@@ -92,6 +102,16 @@
   }
 }
 
+.cart-item-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+
 .product-image {
   max-width: 100%;
   max-height: 120px;
@@ -102,21 +122,39 @@
      without needing a container. */
   margin-left: auto;
   margin-right: auto;
+  transition: transform 0.5s ease-in-out;
+}
+
+.product-image:hover {
+  transform: scale(1.1);
 }
 
 .product-name {
+  color: rgb(255, 255, 255);
   font-weight: 700;
   margin-bottom: 8px;
 }
 
 .product-price {
-  color: rgb(177, 39, 4);
+  color: rgb(255, 225, 170);
   font-weight: 700;
   margin-bottom: 5px;
 }
 
 .product-quantity .link-primary {
   margin-left: 3px;
+}
+
+.product-quantity {
+  color: rgb(255, 255, 255);
+}
+
+.cart-item-details .link-primary {
+  color: rgb(145, 230, 255);
+}
+
+.cart-item-details .link-primary:hover {
+  color: rgb(255, 210, 102);
 }
 
 @media (max-width: 1000px) {
@@ -135,6 +173,7 @@
 }
 
 .delivery-options-title {
+  color: rgb(255, 255, 255);
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -152,13 +191,13 @@
 }
 
 .delivery-option-date {
-  color: rgb(0, 118, 0);
+  color: rgb(190, 255, 205);
   font-weight: 500;
   margin-bottom: 3px;
 }
 
 .delivery-option-price {
-  color: rgb(120, 120, 120);
+  color: rgb(255, 255, 255);
   font-size: 15px;
 }
 
@@ -166,6 +205,7 @@
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 12px;
+  color: rgb(255, 238, 185);
 }
 
 .payment-summary-row {
@@ -177,9 +217,11 @@
 
   font-size: 15px;
   margin-bottom: 9px;
+  color: rgb(255, 255, 255);
 }
 
 .payment-summary-money {
+  color: rgb(255, 255, 255);
   text-align: right;
 }
 
@@ -192,7 +234,7 @@
 }
 
 .total-row {
-  color: rgb(177, 39, 4);
+  color: rgb(255, 230, 170);
   font-weight: 700;
   font-size: 18px;
 
@@ -208,4 +250,10 @@
 
   margin-top: 11px;
   margin-bottom: 15px;
+}
+
+.js-cart-items p {
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 20px;
 }

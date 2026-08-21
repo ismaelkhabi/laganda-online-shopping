@@ -26,16 +26,17 @@
       <div class="header-content">
         <div class="checkout-header-left-section">
           <a href="amazon.html">
-            <img class="amazon-logo" src="images/amazon-logo.png" />
+            <img class="amazon-logo" src="images/laganda-light-text.png" />
             <img
               class="amazon-mobile-logo"
-              src="images/amazon-mobile-logo.png"
+              src="images/light-laganda-transparent.png"
             />
           </a>
         </div>
 
         <div class="checkout-header-middle-section">
-          Checkout (<a class="return-to-home-link" href="amazon.html">3 items</a
+          Checkout (<a class="return-to-home-link" href="amazon.html"
+            ><span class="checkout-item-count">0</span> items</a
           >)
         </div>
 
@@ -50,166 +51,35 @@
 
       <div class="checkout-grid">
         <div class="order-summary">
-          <div class="cart-item-container">
-            <div class="delivery-date">Delivery date: Tuesday, June 21</div>
-
-            <div class="cart-item-details-grid">
-              <img
-                class="product-image"
-                src="images/products/athletic-cotton-socks-6-pairs.jpg"
-              />
-
-              <div class="cart-item-details">
-                <div class="product-name">
-                  Black and Gray Athletic Cotton Socks - 6 Pairs
-                </div>
-                <div class="product-price">$10.90</div>
-                <div class="product-quantity">
-                  <span> Quantity: <span class="quantity-label">2</span> </span>
-                  <span class="update-quantity-link link-primary">
-                    Update
-                  </span>
-                  <span class="delete-quantity-link link-primary">
-                    Delete
-                  </span>
-                </div>
-              </div>
-
-              <div class="delivery-options">
-                <div class="delivery-options-title">
-                  Choose a delivery option:
-                </div>
-                <div class="delivery-option">
-                  <input
-                    type="radio"
-                    checked
-                    class="delivery-option-input"
-                    name="delivery-option-1"
-                  />
-                  <div>
-                    <div class="delivery-option-date">Tuesday, June 21</div>
-                    <div class="delivery-option-price">FREE Shipping</div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input
-                    type="radio"
-                    class="delivery-option-input"
-                    name="delivery-option-1"
-                  />
-                  <div>
-                    <div class="delivery-option-date">Wednesday, June 15</div>
-                    <div class="delivery-option-price">$4.99 - Shipping</div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input
-                    type="radio"
-                    class="delivery-option-input"
-                    name="delivery-option-1"
-                  />
-                  <div>
-                    <div class="delivery-option-date">Monday, June 13</div>
-                    <div class="delivery-option-price">$9.99 - Shipping</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="cart-item-container">
-            <div class="delivery-date">Delivery date: Wednesday, June 15</div>
-
-            <div class="cart-item-details-grid">
-              <img
-                class="product-image"
-                src="images/products/intermediate-composite-basketball.jpg"
-              />
-
-              <div class="cart-item-details">
-                <div class="product-name">Intermediate Size Basketball</div>
-                <div class="product-price">$20.95</div>
-                <div class="product-quantity">
-                  <span> Quantity: <span class="quantity-label">1</span> </span>
-                  <span class="update-quantity-link link-primary">
-                    Update
-                  </span>
-                  <span class="delete-quantity-link link-primary">
-                    Delete
-                  </span>
-                </div>
-              </div>
-
-              <div class="delivery-options">
-                <div class="delivery-options-title">
-                  Choose a delivery option:
-                </div>
-
-                <div class="delivery-option">
-                  <input
-                    type="radio"
-                    class="delivery-option-input"
-                    name="delivery-option-2"
-                  />
-                  <div>
-                    <div class="delivery-option-date">Tuesday, June 21</div>
-                    <div class="delivery-option-price">FREE Shipping</div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input
-                    type="radio"
-                    checked
-                    class="delivery-option-input"
-                    name="delivery-option-2"
-                  />
-                  <div>
-                    <div class="delivery-option-date">Wednesday, June 15</div>
-                    <div class="delivery-option-price">$4.99 - Shipping</div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input
-                    type="radio"
-                    class="delivery-option-input"
-                    name="delivery-option-2"
-                  />
-                  <div>
-                    <div class="delivery-option-date">Monday, June 13</div>
-                    <div class="delivery-option-price">$9.99 - Shipping</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="js-cart-items"></div>
         </div>
 
         <div class="payment-summary">
           <div class="payment-summary-title">Order Summary</div>
 
           <div class="payment-summary-row">
-            <div>Items (3):</div>
-            <div class="payment-summary-money">$42.75</div>
+            <div>Items (<span class="summary-item-count">0</span>):</div>
+            <div class="payment-summary-money summary-items-price">$0.00</div>
           </div>
 
           <div class="payment-summary-row">
             <div>Shipping &amp; handling:</div>
-            <div class="payment-summary-money">$4.99</div>
+            <div class="payment-summary-money summary-shipping">$0.00</div>
           </div>
 
           <div class="payment-summary-row subtotal-row">
             <div>Total before tax:</div>
-            <div class="payment-summary-money">$47.74</div>
+            <div class="payment-summary-money summary-subtotal">$0.00</div>
           </div>
 
           <div class="payment-summary-row">
             <div>Estimated tax (10%):</div>
-            <div class="payment-summary-money">$4.77</div>
+            <div class="payment-summary-money summary-tax">$0.00</div>
           </div>
 
           <div class="payment-summary-row total-row">
             <div>Order total:</div>
-            <div class="payment-summary-money">$52.51</div>
+            <div class="payment-summary-money summary-total">$0.00</div>
           </div>
 
           <button class="place-order-button button-primary">
@@ -219,4 +89,6 @@
       </div>
     </div>
   </body>
+  <script src="data/products.js"></script>
+  <script type="module" src="scripts/checkout.js"></script>
 </html>
