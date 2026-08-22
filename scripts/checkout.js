@@ -24,6 +24,17 @@ function updateOrderSummary(itemCount, itemsPriceCents) {
   summaryTotal.textContent = `$${((subtotalCents + taxCents) / 100).toFixed(2)}`;
 }
 
+function updateCartSummary() {
+  const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const itemsPriceCents = cart.reduce((total, cartItem) => {
+    const product = products.find((item) => item.id === cartItem.productId);
+    return total + (product ? product.priceCents * cartItem.quantity : 0);
+  }, 0);
+
+  itemCountElement.textContent = itemCount;
+  updateOrderSummary(itemCount, itemsPriceCents);
+}
+
 function renderCartItems() {
   let itemCount = 0;
   let itemsPriceCents = 0;
@@ -43,13 +54,14 @@ function renderCartItems() {
         <div class="delivery-date">Delivery date: Tuesday, June 21</div>
         <div class="cart-item-details-grid">
           <div class="cart-item-image-container">
-            <img class="product-image" src="${product.image}" />
+            <img class="product-image clickable-product-image" src="${product.image}" alt="${product.name}" />
           </div>
           <div class="cart-item-details">
             <div class="product-name">${product.name}</div>
             <div class="product-price">$${(product.priceCents / 100).toFixed(2)}</div>
             <div class="product-quantity">
               Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+              <input class="quantity-update-input" type="number" min="1" step="1" placeholder="Update" data-product-id="${product.id}" aria-label="Update quantity for ${product.name}" />
               <span class="remove-one-link link-primary" data-product-id="${product.id}">Remove 1</span>
               <span class="delete-quantity-link link-primary" data-product-id="${product.id}">Delete all</span>
             </div>
@@ -83,22 +95,64 @@ function renderCartItems() {
   });
 
   cartItemsContainer.innerHTML = cartItemsHTML || "<p>Your cart is empty.</p>";
-  itemCountElement.textContent = itemCount;
-  updateOrderSummary(itemCount, itemsPriceCents);
+  updateCartSummary();
 }
 
 document.addEventListener("change", (event) => {
   if (event.target.matches(".delivery-option-input")) {
-    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-    const itemsPriceCents = cart.reduce((total, cartItem) => {
-      const product = products.find((item) => item.id === cartItem.productId);
-      return total + (product ? product.priceCents * cartItem.quantity : 0);
-    }, 0);
-    updateOrderSummary(itemCount, itemsPriceCents);
+    updateCartSummary();
+  }
+});
+
+document.addEventListener("input", (event) => {
+  const quantityInput = event.target.closest(".quantity-update-input");
+
+  if (!quantityInput || quantityInput.value === "") {
+    return;
+  }
+
+  const quantity = Number(quantityInput.value);
+
+  if (!Number.isInteger(quantity) || quantity < 1) {
+    return;
+  }
+
+  const cartItem = cart.find(
+    (item) => item.productId === quantityInput.dataset.productId,
+  );
+
+  if (cartItem) {
+    cartItem.quantity = quantity;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    quantityInput
+      .closest(".product-quantity")
+      .querySelector(".quantity-label").textContent = quantity;
+    updateCartSummary();
   }
 });
 
 document.addEventListener("click", (event) => {
+  const productImage = event.target.closest(".clickable-product-image");
+  const imageViewer = document.querySelector(".image-viewer");
+  const imageViewerImage = document.querySelector(".image-viewer-image");
+
+  if (productImage) {
+    imageViewerImage.src = productImage.src;
+    imageViewerImage.alt = productImage.alt;
+    imageViewer.classList.add("is-open");
+    imageViewer.setAttribute("aria-hidden", "false");
+    return;
+  }
+
+  if (
+    event.target.closest(".image-viewer-close") ||
+    event.target === imageViewer
+  ) {
+    imageViewer.classList.remove("is-open");
+    imageViewer.setAttribute("aria-hidden", "true");
+    return;
+  }
+
   const placeOrderButton = event.target.closest(".place-order-button");
 
   if (placeOrderButton) {
@@ -135,6 +189,15 @@ document.addEventListener("click", (event) => {
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     renderCartItems();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  const imageViewer = document.querySelector(".image-viewer");
+
+  if (event.key === "Escape" && imageViewer.classList.contains("is-open")) {
+    imageViewer.classList.remove("is-open");
+    imageViewer.setAttribute("aria-hidden", "true");
   }
 });
 

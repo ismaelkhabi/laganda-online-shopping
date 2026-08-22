@@ -7,8 +7,9 @@ products.forEach((product) => {
    <div class="product-container">
           <div class="product-image-container">
             <img
-              class="product-image"
+              class="product-image clickable-product-image"
               src="${product.image}"
+              alt="${product.name}"
             />
           </div>
 
@@ -56,3 +57,33 @@ products.forEach((product) => {
 });
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+const imageViewer = document.querySelector(".image-viewer");
+const imageViewerImage = document.querySelector(".image-viewer-image");
+
+document.addEventListener("click", (event) => {
+  const productImage = event.target.closest(".clickable-product-image");
+
+  if (productImage) {
+    imageViewerImage.src = productImage.src;
+    imageViewerImage.alt = productImage.alt;
+    imageViewer.classList.add("is-open");
+    imageViewer.setAttribute("aria-hidden", "false");
+    return;
+  }
+
+  if (
+    event.target.closest(".image-viewer-close") ||
+    event.target === imageViewer
+  ) {
+    imageViewer.classList.remove("is-open");
+    imageViewer.setAttribute("aria-hidden", "true");
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && imageViewer.classList.contains("is-open")) {
+    imageViewer.classList.remove("is-open");
+    imageViewer.setAttribute("aria-hidden", "true");
+  }
+});

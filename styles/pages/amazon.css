@@ -111,8 +111,48 @@
   transition: all 0.4s ease-out;
 }
 
+.clickable-product-image {
+  cursor: pointer;
+}
+
 .product-image:hover {
   transform: scale(1.15);
+}
+
+.image-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.88);
+  cursor: zoom-out;
+}
+
+.image-viewer.is-open {
+  display: flex;
+}
+
+.image-viewer-image {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain;
+  cursor: default;
+}
+
+.image-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  color: rgb(255, 255, 255);
+  background: transparent;
+  border: 0;
+  font-size: 36px;
+  line-height: 1;
 }
 
 .product-name {
