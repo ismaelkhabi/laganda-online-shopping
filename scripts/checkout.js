@@ -1,4 +1,15 @@
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { cart } from "../data/cart.js";
+
+const today = dayjs();
+const deliveryDates = [
+  today.add(7, "days"),
+  today.add(3, "days"),
+  today.add(1, "days"),
+];
+const savedDeliveryOptions = JSON.parse(
+  localStorage.getItem("deliveryOptions") || "{}",
+);
 
 const cartItemsContainer = document.querySelector(".js-cart-items");
 const itemCountElement = document.querySelector(".checkout-item-count");
@@ -49,9 +60,12 @@ function renderCartItems() {
 
     itemCount += cartItem.quantity;
     itemsPriceCents += product.priceCents * cartItem.quantity;
+    const selectedDeliveryOption = Number(
+      savedDeliveryOptions[product.id] || 0,
+    );
     cartItemsHTML += `
       <div class="cart-item-container">
-        <div class="delivery-date">Delivery date: Tuesday, June 21</div>
+        <div class="delivery-date">Delivery date: ${deliveryDates[selectedDeliveryOption].format("dddd, MMMM D")}</div>
         <div class="cart-item-details-grid">
           <div class="cart-item-image-container">
             <img class="product-image clickable-product-image" src="${product.image}" alt="${product.name}" />
@@ -69,23 +83,23 @@ function renderCartItems() {
           <div class="delivery-options">
             <div class="delivery-options-title">Choose a delivery option:</div>
             <div class="delivery-option">
-              <input type="radio" checked data-shipping-cents="0" class="delivery-option-input" name="delivery-option-${index}" />
+              <input type="radio" ${selectedDeliveryOption === 0 ? "checked" : ""} data-product-id="${product.id}" data-shipping-cents="0" data-delivery-date-index="0" class="delivery-option-input" name="delivery-option-${index}" />
               <div>
-                <div class="delivery-option-date">Tuesday, June 21</div>
+                <div class="delivery-option-date">${deliveryDates[0].format("dddd, MMMM D")}</div>
                 <div class="delivery-option-price">FREE Shipping</div>
               </div>
             </div>
             <div class="delivery-option">
-              <input type="radio" data-shipping-cents="499" class="delivery-option-input" name="delivery-option-${index}" />
+              <input type="radio" ${selectedDeliveryOption === 1 ? "checked" : ""} data-product-id="${product.id}" data-shipping-cents="499" data-delivery-date-index="1" class="delivery-option-input" name="delivery-option-${index}" />
               <div>
-                <div class="delivery-option-date">Wednesday, August 26</div>
+                <div class="delivery-option-date">${deliveryDates[1].format("dddd, MMMM D")}</div>
                 <div class="delivery-option-price">$4.99 - Shipping</div>
               </div>
             </div>
             <div class="delivery-option">
-              <input type="radio" data-shipping-cents="999" class="delivery-option-input" name="delivery-option-${index}" />
+              <input type="radio" ${selectedDeliveryOption === 2 ? "checked" : ""} data-product-id="${product.id}" data-shipping-cents="999" data-delivery-date-index="2" class="delivery-option-input" name="delivery-option-${index}" />
               <div>
-                <div class="delivery-option-date">Monday, August 24</div>
+                <div class="delivery-option-date">${deliveryDates[2].format("dddd, MMMM D")}</div>
                 <div class="delivery-option-price">$9.99 - Shipping</div>
               </div>
             </div>
@@ -100,6 +114,19 @@ function renderCartItems() {
 
 document.addEventListener("change", (event) => {
   if (event.target.matches(".delivery-option-input")) {
+    const cartItemContainer = event.target.closest(".cart-item-container");
+    const selectedDate =
+      deliveryDates[Number(event.target.dataset.deliveryDateIndex)];
+    savedDeliveryOptions[event.target.dataset.productId] = Number(
+      event.target.dataset.deliveryDateIndex,
+    );
+    localStorage.setItem(
+      "deliveryOptions",
+      JSON.stringify(savedDeliveryOptions),
+    );
+
+    cartItemContainer.querySelector(".delivery-date").textContent =
+      `Delivery date: ${selectedDate.format("dddd, MMMM D")}`;
     updateCartSummary();
   }
 });
